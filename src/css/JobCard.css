@@ -16,6 +16,32 @@
   margin-bottom: 15px;
 }
 
+.job-type-badges {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 20px; /* 👈 pastilla redondeada */
+  color: #fff;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.internship-badge {
+  background: linear-gradient(135deg, #2e7d32, #43a047); /* verde degradado */
+}
+
+.parttime-badge {
+  background: linear-gradient(135deg, #1976d2, #42a5f5); /* azul degradado */
+}
+
+
 .company-logo {
   width: 48px;
   height: 48px;
