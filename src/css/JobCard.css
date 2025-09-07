@@ -1,0 +1,122 @@
+.job-card {
+  background-color: #fff;
+  border-radius: 8px; /* Borde más pequeño */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra más sutil */
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  width: 320px; /* Ajusta el ancho para que quepan 3 por fila */
+  border: 1px solid #e6e6e6;
+  position: relative; /* Para posicionar el ícono de la esquina */
+}
+
+/* Encabezado */
+.job-header {
+  display: flex;
+  align-items: flex-start; /* Alinear arriba para el logo */
+  margin-bottom: 15px;
+}
+
+.company-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 4px; /* Borde más cuadrado */
+  margin-right: 12px;
+  border: 1px solid #e6e6e6;
+}
+
+.company-info {
+  flex-grow: 1;
+}
+
+.company-name {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+  color: #333;
+}
+
+.company-location {
+  font-size: 0.8rem;
+  color: #777;
+  margin: 0;
+}
+
+.job-time {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 35px;
+  border: 1px solid #e0e0e0;
+  border-radius: 0%;
+  color: #777;
+}
+
+/* Cuerpo de la tarjeta */
+.job-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 10px;
+  line-height: 1.4;
+  height: 4.2em; /* Altura fija para el título */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.salary-info {
+  display: inline-flex;
+  align-items: center;
+  background-color: #d1fae5;
+  color: #065f46;
+  border-radius: 20px;
+  padding: 4px 8px; /* Relleno más pequeño */
+  font-size: 0.8rem; /* Tamaño de fuente más pequeño */
+  font-weight: 500;
+}
+
+.salary-info svg {
+  margin-right: 4px;
+}
+
+/* Pie de la tarjeta y botones */
+.job-footer {
+  display: flex;
+  gap: 8px; /* Espacio más pequeño entre botones */
+  margin-top: 15px; /* Espacio superior */
+}
+
+.btn {
+  padding: 10px 16px; /* Relleno más pequeño */
+  border-radius: 4px; /* Borde más cuadrado */
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+
+.btn-save {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  color: #555;
+}
+
+.btn-save:hover {
+  background-color: #f0f0f0;
+}
+
+.btn-apply {
+  background-color: #000080;
+  border: none;
+  color: #fff;
+  flex-grow: 1;
+}

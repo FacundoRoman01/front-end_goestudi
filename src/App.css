@@ -1,0 +1,30 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* En App.css */
+.job-grid-container {
+  display: grid;
+  /* Define 3 columnas con el mismo ancho */
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 5px; /* Espacio entre las tarjetas */
+  margin: 23px auto; /* Centra el contenedor y añade margen */
+  max-width: 1500px; /* Limita el ancho máximo del contenedor */
+  padding: 0 20px; /* Añade un poco de padding en los lados */
+  background-color: #f9fafb;
+}
+
+/* Opcional: Estilos para que el diseño sea responsivo */
+@media (max-width: 1024px) {
+  .job-grid-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas en pantallas medianas */
+  }
+}
+
+@media (max-width: 768px) {
+  .job-grid-container {
+    grid-template-columns: 1fr; /* 1 columna en pantallas pequeñas */
+  }
+}
