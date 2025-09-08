@@ -1,47 +1,224 @@
+/* Header Styles */
 .header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(8px);
+  background-color: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid #e5e7eb; /* gris claro */
+}
+
+.header-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  background: #ffffff;
-  border-bottom: 1px solid #eaeaea;
+  justify-content: space-between;
+  height: 64px;
 }
 
+/* Logo Styles */
 .logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #2563eb; /* Azul estilo LinkedIn */
-}
-
-.nav ul {
-  list-style: none;
   display: flex;
-  gap: 1.5rem;
-  margin: 0;
-  padding: 0;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.nav a {
+.logo-icon {
+  width: 32px;
+  height: 32px;
+  color: #2563eb; /* azul primary */
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #111827; /* gris oscuro */
+  font-family: "Geist Sans", sans-serif;
+}
+
+/* Desktop Navigation */
+.desktop-nav {
+  display: none;
+}
+
+.desktop-nav .nav-link {
+  color: #111827;
   text-decoration: none;
-  color: #333;
+  font-size: 1.2rem;
   font-weight: 500;
-  transition: color 0.2s;
+  position: relative;
+  transition: color 0.2s ease;
 }
 
-.nav a:hover {
+.desktop-nav .nav-link:hover {
   color: #2563eb;
 }
 
-.btn-login {
-  background: #2563eb;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.2s;
+.desktop-nav .nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #2563eb;
+  transition: width 0.3s ease;
 }
 
-.btn-login:hover {
-  background: #1e4db7;
+.desktop-nav .nav-link:hover::after {
+  width: 100%;
+}
+
+/* Desktop Actions */
+.desktop-actions {
+  display: none;
+  gap: 0.75rem;
+}
+
+/* .upload-cv-btn {
+  background-color: #f59e0b; 
+  color: white;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.upload-cv-btn:hover {
+  background-color: #d97706;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+} */
+
+.login-btn {
+  font-size: 1rem;
+  border: 1px solid #d1d5db;
+  background: transparent;
+  color: #111827;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  background-color: #f3f4f6;
+  transform: translateY(-1px);
+}
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+  display: block;
+  padding: 0.5rem;
+  color: #111827;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.mobile-menu-btn:hover {
+  color: #2563eb;
+}
+
+/* Mobile Navigation */
+.mobile-nav {
+  display: block;
+  background-color: white;
+  border-bottom: 1px solid #e5e7eb;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: scaleY(0);
+  transition: all 0.3s ease-in-out;
+}
+
+.mobile-nav.mobile-nav-open {
+  max-height: 400px;
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+.mobile-nav-content {
+  padding: 1.5rem 1rem;
+}
+
+.mobile-nav-link {
+  display: block;
+  color: #111827;
+  font-weight: 500;
+  padding: 0.5rem 0;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.mobile-nav-link:hover {
+  color: #2563eb;
+}
+
+.mobile-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 1rem;
+}
+
+.mobile-btn {
+  width: 100%;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Animations */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mobile-nav.mobile-nav-open .mobile-nav-content {
+  animation: slideDown 0.3s ease-out;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .desktop-nav {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .desktop-actions {
+    display: flex;
+  }
+
+  .mobile-menu-btn {
+    display: none;
+  }
+
+  .mobile-nav {
+    display: none;
+  }
+}
+
+/* Focus States for Accessibility */
+.nav-link:focus,
+.mobile-nav-link:focus,
+.mobile-menu-btn:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+  border-radius: 4px;
 }

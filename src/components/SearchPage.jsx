@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Search, MapPin, Plus } from "lucide-react";
 import "../css/SearchPage.css";
 
@@ -9,7 +9,8 @@ const SearchPage = ({ onSearch }) => {
 
   const tabs = ["Trabajos", "Pasantía", "Part-Time"];
 
-  const handleSearch = () => {
+  
+  const handleSearch = (tabName = activeTab) => {
     let filters = {
       keyword: searchQuery,
       location: location,
@@ -17,24 +18,18 @@ const SearchPage = ({ onSearch }) => {
       isPartTime: null,
     };
 
-    if (activeTab === "Pasantía") {
+    if (tabName === "Pasantía") {
       filters.isInternship = true;
-    } else if (activeTab === "Part-Time") {
+    } else if (tabName === "Part-Time") {
       filters.isPartTime = true;
     }
 
     onSearch(filters);
   };
 
-  useEffect(() => {
-    handleSearch();
-  }, [activeTab]);
-
-  // ✅ Texto dinámico del placeholder según la pestaña activa
-  const getPlaceholder = () => {
-    if (activeTab === "Pasantía") return "Buscar por pasantía...";
-    if (activeTab === "Part-Time") return "Buscar por part-time...";
-    return "Buscar por trabajos...";
+  const handleTabClick = (tabName) => {
+    setActiveTab(tabName);
+    handleSearch(tabName); // delegamos todo en handleSearch
   };
 
   return (
@@ -51,7 +46,7 @@ const SearchPage = ({ onSearch }) => {
             <button
               key={tab}
               className={`tab-btn ${activeTab === tab ? "active" : ""}`}
-              onClick={() => setActiveTab(tab)}
+              onClick={() => handleTabClick(tab)}
             >
               {tab}
             </button>
@@ -69,7 +64,13 @@ const SearchPage = ({ onSearch }) => {
               <Search className="input-icon" />
               <input
                 type="text"
-                placeholder={getPlaceholder()} // 👈 dinámico
+                placeholder={
+                  activeTab === "Pasantía"
+                    ? "Buscar por pasantía..."
+                    : activeTab === "Part-Time"
+                    ? "Buscar por part-time..."
+                    : "Buscar por trabajos..."
+                }
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="search-input"
@@ -90,7 +91,7 @@ const SearchPage = ({ onSearch }) => {
               />
             </div>
 
-            <button onClick={handleSearch} className="search-button">
+            <button onClick={() => handleSearch()} className="search-button">
               →
             </button>
           </div>

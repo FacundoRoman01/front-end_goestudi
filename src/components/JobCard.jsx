@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import '../css/JobCard.css';
 import { FaRegClock, FaMoneyBillAlt, FaBookmark, FaRegBookmark } from 'react-icons/fa';
 import Modal from '../components/Modal.jsx';
+import '../css/JobCard.css';
 
 // Añade isInternship y isPartTime a los props
 const JobCard = ({ company, location, title, isPaid, jobDetails,  isInternship, isPartTime }) => {
