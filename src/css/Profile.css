@@ -1,0 +1,338 @@
+/* Estilos modernos para el perfil de usuario */
+
+.loading-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  font-size: 1.125rem;
+  color: #6b7280; /* gris medio */
+  font-weight: 500;
+}
+
+/* Layout principal */
+.profile-dashboard {
+  display: flex;
+  min-height: calc(100vh - 80px);
+  background: #f9fafb; /* gris claro */
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Sidebar */
+.profile-sidebar {
+  width: 320px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+  height: fit-content;
+  position: sticky;
+  top: 2rem;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 1.5rem;
+  display: block;
+  border: 4px solid #0891b2; /* azul */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.profile-avatar:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.profile-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827; /* casi negro */
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.profile-location {
+  color: #6b7280; /* gris medio */
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+}
+
+.profile-location::before {
+  content: "📍";
+}
+
+/* Botones sidebar */
+.sidebar-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.toggle-button {
+  padding: 0.875rem 1.25rem;
+  border: 2px solid #d1d5db; /* gris borde */
+  background: #f9fafb;
+  color: #111827;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.toggle-button:hover {
+  background: #f3f4f6; /* gris hover */
+  border-color: #0891b2;
+  transform: translateY(-1px);
+}
+
+.toggle-button.active {
+  background: #0891b2; /* azul */
+  color: #ffffff;
+  border-color: #0891b2;
+  box-shadow: 0 4px 12px rgba(8, 145, 178, 0.3);
+}
+
+.logout-button {
+  padding: 0.875rem 1.25rem;
+  background: #dc2626; /* rojo */
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 1rem;
+}
+
+.logout-button:hover {
+  background: #b91c1c;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+}
+
+/* Área principal */
+.profile-content {
+  flex: 1;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+}
+
+.status-message {
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  font-weight: 500;
+  background: #f59e0b; /* naranja */
+  color: #ffffff;
+}
+
+/* Vista perfil */
+.profile-view {
+  display: grid;
+  gap: 2rem;
+}
+
+.card-about,
+.card-education,
+.card-skills {
+  background: #f9fafb;
+  padding: 2rem;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  transition: all 0.2s ease;
+}
+
+.card-about:hover,
+.card-education:hover,
+.card-skills:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.card-about h3,
+.card-education h3,
+.card-skills h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0891b2; /* azul */
+  margin-bottom: 1rem;
+}
+
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.skill-chip {
+  background: #0891b2;
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.skill-chip:hover {
+  background: #f59e0b; /* naranja */
+  transform: translateY(-1px);
+}
+
+/* Link CV */
+.cv-link {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background: #f59e0b;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  margin-top: 1rem;
+}
+
+.cv-link:hover {
+  background: #d97706;
+  transform: translateY(-1px);
+}
+
+/* Formulario */
+.profile-edit {
+  background: #f9fafb;
+  border-radius: 16px;
+  padding: 2rem;
+  border: 1px solid #e5e7eb;
+}
+
+.edit-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.form-field,
+.form-field-full {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-field-full {
+  grid-column: 1 / -1;
+}
+
+.form-field label,
+.form-field-full label {
+  font-weight: 600;
+  color: #111827;
+  font-size: 0.95rem;
+}
+
+.form-field input,
+.form-field textarea {
+  padding: 0.875rem 1rem;
+  border: 2px solid #d1d5db;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #111827;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: #0891b2;
+  box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.3);
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+  font-family: inherit;
+  line-height: 1.5;
+}
+
+/* Botón guardar */
+.save-button {
+  grid-column: 1 / -1;
+  padding: 1rem 2rem;
+  background: #0891b2;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 1rem;
+  justify-self: center;
+  min-width: 200px;
+}
+
+.save-button:hover {
+  background: #0e7490;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(8, 145, 178, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .profile-dashboard {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1.5rem;
+  }
+
+  .profile-sidebar {
+    width: 100%;
+    position: static;
+  }
+
+  .sidebar-actions {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .logout-button {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .edit-form {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-dashboard {
+    padding: 0.5rem;
+  }
+
+  .profile-sidebar,
+  .profile-content {
+    padding: 1.5rem;
+  }
+
+  .sidebar-actions {
+    flex-direction: column;
+  }
+
+  .logout-button {
+    margin-top: 1rem;
+  }
+}

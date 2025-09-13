@@ -4,7 +4,7 @@ import SearchPage from "../components/SearchPage.jsx";
 import JobCard from "../components/JobCard.jsx";
 import LoadingSpinner from "../components/LoadingSpinner.jsx";
 import InfiniteScroll from 'react-infinite-scroll-component';
-import Footer from '../components/Footer.jsx';
+// import Footer from '../components/Footer.jsx';
 import "../css/Home.css";
 import axios from 'axios';
 
@@ -123,7 +123,7 @@ const Home = () => {
                     )}
                 </div>
             </div>
-              <Footer />      
+              {/* <Footer />       */}
 
         </div>
     );

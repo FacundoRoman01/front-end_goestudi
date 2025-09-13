@@ -1,13 +1,12 @@
 import { useState } from 'react';
-import { FaRegClock, FaMoneyBillAlt, FaBookmark, FaRegBookmark } from 'react-icons/fa';
+import { FaMoneyBillAlt, FaBookmark, FaRegBookmark } from 'react-icons/fa';
 import Modal from '../components/Modal.jsx';
 import '../css/JobCard.css';
 
-// Añade isInternship y isPartTime a los props
-const JobCard = ({ company, location, title, isPaid, jobDetails,  isInternship, isPartTime }) => {
+const JobCard = ({ id, company, location, title, isPaid, jobDetails, isInternship, isPartTime, postedAgo, salary, description, status, deadline }) => {
     const [isSaved, setIsSaved] = useState(false);
     const [showModal, setShowModal] = useState(false);
-    
+
     const handleSaveClick = (e) => {
         e.stopPropagation();
         setIsSaved(!isSaved);
@@ -22,7 +21,7 @@ const JobCard = ({ company, location, title, isPaid, jobDetails,  isInternship, 
     };
 
     return (
-        <div className="job-card">
+        <div className="job-card" onClick={handleCardClick}>
             <div className="job-header">
                 <div className="company-logo">
                     <div className="logo-placeholder"></div>
@@ -31,16 +30,12 @@ const JobCard = ({ company, location, title, isPaid, jobDetails,  isInternship, 
                     <h3 className="company-name">{company}</h3>
                     <p className="company-location">{location}</p>
                 </div>
-                {/* Nueva sección para mostrar los tipos de trabajo */}
                 <div className="job-type-badges">
                     {isInternship && <span className="badge internship-badge">Pasantía</span>}
                     {isPartTime && <span className="badge parttime-badge">Part-Time</span>}
                 </div>
-                {/* <div className="job-time">
-                    <FaRegClock />
-                    <span>{postedAgo}</span>
-                </div> */}
             </div>
+
             <div className="job-body">
                 <h2 className="job-title">{title}</h2>
                 {isPaid && (
@@ -52,23 +47,39 @@ const JobCard = ({ company, location, title, isPaid, jobDetails,  isInternship, 
                     </div>
                 )}
             </div>
-            
-            
+
             <div className="job-footer">
                 <button className={`btn btn-save ${isSaved ? 'saved' : ''}`} onClick={handleSaveClick}>
                     {isSaved ? <FaBookmark /> : <FaRegBookmark />}
                     <span>{isSaved ? 'Guardado' : 'Guardar'}</span>
                 </button>
-                <button className="btn btn-apply"  onClick={handleCardClick}>Aplicar</button >
+                <button className="btn btn-apply" onClick={(e) => { e.stopPropagation(); setShowModal(true); }}>
+                    Aplicar
+                </button>
             </div>
 
-            <Modal show={showModal} onClose={handleCloseModal}>
-                <div className="modal-content-details">
-                    <h3>{title}</h3>
-                    <h4>{company} - {location}</h4>
-                    <p>{jobDetails}</p>
-                </div>
-            </Modal>
+            <Modal
+                job={{
+                    id,
+                    companyName: company,
+                    location,
+                    title,
+                    isPaid,
+                    isInternship,
+                    isPartTime,
+                    salary,
+                    description,
+                    jobDetails,
+                    status,
+                    postedAgo,
+                    deadline,
+                    requirements: "Requisito 1\nRequisito 2" // ⚡️ si tu API trae esto, pasalo aquí
+                }}
+                isOpen={showModal}
+                onClose={handleCloseModal}
+                onApply={() => alert(`Aplicaste al empleo ${title}`)}
+                onSave={() => setIsSaved(true)}
+            />
         </div>
     );
 };

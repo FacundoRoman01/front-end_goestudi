@@ -3,10 +3,13 @@
   position: sticky;
   top: 0;
   z-index: 50;
-  backdrop-filter: blur(8px);
-  background-color: rgba(255, 255, 255, 0.95);
-  border-bottom: 1px solid #e5e7eb; /* gris claro */
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); /* 🔥 le da más nivel */
+  transition: background 0.3s ease, border 0.3s ease;
 }
+
 
 .header-container {
   max-width: 1280px;
@@ -36,6 +39,7 @@
   font-weight: 800;
   color: #111827; /* gris oscuro */
   font-family: "Geist Sans", sans-serif;
+  text-decoration: none;
 }
 
 /* Desktop Navigation */
@@ -95,21 +99,41 @@
 } */
 
 .login-btn {
-  font-size: 1rem;
-  border: 1px solid #d1d5db;
-  background: transparent;
-  color: #111827;
-  font-weight: 500;
-  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+  font-family: serif;
+  border: 1px solid #2563eb;
+  background: #2563eb;
+  color: white;
+  font-weight: 600;
+  padding: 0.45rem 1.1rem;
   border-radius: 8px;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .login-btn:hover {
-  background-color: #f3f4f6;
+  background-color: #1d4ed8;
+  border-color: #1d4ed8;
   transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(37, 99, 235, 0.3);
 }
+
+.btn_user{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 31px; /* Tamaño del círculo */
+  height: 31px; /* Tamaño del círculo */
+  border: 2px solid #000080; /* Borde del círculo */
+  border-radius: 50%; /* Hace el elemento completamente redondo */
+  color: #000080; /* Color del ícono de usuario */
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  text-decoration: none;
+  
+}
+
 
 /* Mobile Menu Button */
 .mobile-menu-btn {
@@ -218,7 +242,7 @@
 .nav-link:focus,
 .mobile-nav-link:focus,
 .mobile-menu-btn:focus {
-  outline: 2px solid #2563eb;
+  /* outline: 2px solid #2563eb; */
   outline-offset: 2px;
   border-radius: 4px;
 }

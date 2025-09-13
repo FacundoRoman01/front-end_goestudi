@@ -1,13 +1,33 @@
-// src/components/Header.jsx
-import React, { useState } from "react";
-import { Menu, X, Briefcase } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Menu, X, Briefcase, User } from "lucide-react";
+import { Link } from "react-router-dom";
 import "../css/Header.css";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [userName, setUserName] = useState(null);
+
+  useEffect(() => {
+    // Al cargar el componente, verificamos si el usuario ha iniciado sesión
+    const userToken = localStorage.getItem("token");
+    const storedUserName = localStorage.getItem("userName"); // Asumimos que guardas el nombre del usuario en localStorage al iniciar sesión
+
+    if (userToken && storedUserName) {
+      setUserName(storedUserName);
+    } else {
+      setUserName(null);
+    }
+  }, []); // El array vacío asegura que este efecto se ejecute solo una vez al montar el componente
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userName");
+    setUserName(null); // Actualiza el estado para que el componente se vuelva a renderizar
+    toggleMenu(); // Opcional: cierra el menú móvil después de cerrar sesión
   };
 
   return (
@@ -16,26 +36,25 @@ export default function Header() {
         {/* Logo */}
         <div className="logo">
           <Briefcase className="logo-icon" />
-          <span className="logo-text">GoEstudi</span>
+          <Link to="/" className="logo-text">GoEstudi</Link>
         </div>
 
         {/* Desktop Navigation */}
         <nav className="desktop-nav">
-          <a href="#empleos" className="nav-link">
-            Empleos
-          </a>
-          <a href="#companias" className="nav-link">
-            Compañías
-          </a>
-          <a href="#candidatos" className="nav-link">
-            Candidatos
-          </a>
+          {/* Aquí podrías agregar enlaces de navegación, como "Empleos", "Compañías", etc. */}
         </nav>
 
-        {/* Desktop Action Buttons */}
+        {/* Desktop Action Buttons (Renderizado Condicional) */}
         <div className="desktop-actions">
-          {/* <button className="upload-cv-btn">Subir CV</button> */}
-          <button className="login-btn bg-transparent">Login</button>
+          {/* Si el nombre de usuario existe, muestra el botón de perfil, si no, el de Login */}
+          {userName ? (
+            <Link to="/user/profile" className="user-profile-btn">
+              <User size={31} style={{ marginRight: '8px' }} className="btn_user" />
+              {/* {userName} */}
+            </Link>
+          ) : (
+            <Link to="/auth" className="login-btn bg-transparent">Login</Link>
+          )}
         </div>
 
         {/* Mobile Menu Button */}
@@ -48,28 +67,24 @@ export default function Header() {
         </button>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Navigation (Renderizado Condicional) */}
       <div className={`mobile-nav ${isMenuOpen ? "mobile-nav-open" : ""}`}>
         <div className="mobile-nav-content">
-          <a href="#empleos" className="mobile-nav-link" onClick={toggleMenu}>
-            Empleos
-          </a>
-          <a href="#companias" className="mobile-nav-link" onClick={toggleMenu}>
-            Compañías
-          </a>
-          <a href="#candidatos" className="mobile-nav-link" onClick={toggleMenu}>
-            Candidatos
-          </a>
+          {/* Contenido del menú móvil */}
           <div className="mobile-actions">
-            {/* <button className="mobile-btn" onClick={toggleMenu}>
-              Subir CV
-            </button> */}
-            <button
-              className="mobile-btn bg-transparent"
-              onClick={toggleMenu}
-            >
-              Login
-            </button>
+            {userName ? (
+              <>
+                <Link to="/user/profile" className="user-profile-btn mobile-link" onClick={toggleMenu}>
+                  <User size={20} style={{ marginRight: '8px' }} />
+                  {userName}
+                </Link>
+                <button onClick={handleLogout} className="logout-btn mobile-link">Cerrar sesión</button>
+              </>
+            ) : (
+              <Link to="/auth" className="login-btn bg-transparent mobile-link" onClick={toggleMenu}>
+                Login
+              </Link>
+            )}
           </div>
         </div>
       </div>
