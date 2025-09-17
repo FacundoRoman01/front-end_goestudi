@@ -35,11 +35,11 @@ const Home = () => {
         try {
             const url = buildApiUrl(filters, pageToLoad);
             const response = await axios.get(url);
-            
+
             // ¡EL CAMBIO CRÍTICO ESTÁ AQUÍ!
             // Accede a la propiedad 'content' para obtener la lista de trabajos
             const newJobs = response.data.content;
-            
+
             // Si es la primera página, reemplaza los trabajos existentes. Si no, concaténalos.
             if (pageToLoad === 0) {
                 setJobs(newJobs);
@@ -77,7 +77,7 @@ const Home = () => {
         setCurrentFilters(filters);
         fetchJobs(filters, 0); // Carga la primera página con los nuevos filtros
     };
-    
+
     const handleLoadMore = () => {
         const nextPage = page + 1;
         setPage(nextPage);
@@ -100,13 +100,14 @@ const Home = () => {
                             next={handleLoadMore}
                             hasMore={hasMore}
                             loader={<LoadingSpinner />}
-                            //endMessage={<p className="end-message"><b>¡Has visto todos los trabajos!</b></p>}
+                        //endMessage={<p className="end-message"><b>¡Has visto todos los trabajos!</b></p>}
                         >
                             <div className="job-grid">
                                 {jobs.map((job) => (
                                     <JobCard
                                         key={job.id}
-                                        company={job.company}
+                                        id={job.id}                              // ✅ Añadido
+                                        company={job.companyName}                // ✅ CORREGIDO: era job.company
                                         location={job.location}
                                         title={job.title}
                                         isPaid={job.isPaid}
@@ -114,6 +115,11 @@ const Home = () => {
                                         jobDetails={job.jobDetails}
                                         isInternship={job.isInternship}
                                         isPartTime={job.isPartTime}
+                                        salary={job.salary}                      // ✅ Añadido
+                                        description={job.description}            // ✅ Añadido
+                                        status={job.status}                      // ✅ Añadido  
+                                        // deadline={job.deadline}                  // ✅ Añadido
+                                        requirements={job.requirements}          // ✅ Añadido
                                     />
                                 ))}
                             </div>
@@ -123,7 +129,7 @@ const Home = () => {
                     )}
                 </div>
             </div>
-              {/* <Footer />       */}
+            {/* <Footer />       */}
 
         </div>
     );

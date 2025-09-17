@@ -31,7 +31,7 @@
 .logo-icon {
   width: 32px;
   height: 32px;
-  color: #2563eb; /* azul primary */
+  color: #00a8ff; /* azul primary */
 }
 
 .logo-text {
@@ -101,8 +101,8 @@
 .login-btn {
   font-size: 0.95rem;
   font-family: serif;
-  border: 1px solid #2563eb;
-  background: #2563eb;
+  border: 1px solid #00a8ff;
+  background: #00a8ff;
   color: white;
   font-weight: 600;
   padding: 0.45rem 1.1rem;
@@ -113,8 +113,8 @@
 }
 
 .login-btn:hover {
-  background-color: #1d4ed8;
-  border-color: #1d4ed8;
+  background-color: #00a8ff;
+  border-color: #00a8ff;
   transform: translateY(-1px);
   box-shadow: 0 3px 10px rgba(37, 99, 235, 0.3);
 }

@@ -3,7 +3,7 @@ import { FaMoneyBillAlt, FaBookmark, FaRegBookmark } from 'react-icons/fa';
 import Modal from '../components/Modal.jsx';
 import '../css/JobCard.css';
 
-const JobCard = ({ id, company, location, title, isPaid, jobDetails, isInternship, isPartTime, postedAgo, salary, description, status, deadline }) => {
+const JobCard = ({ id, company, location, title, isPaid, jobDetails, isInternship, isPartTime, postedAgo, salary, description, status, deadline, requirements }) => {
     const [isSaved, setIsSaved] = useState(false);
     const [showModal, setShowModal] = useState(false);
 
@@ -23,11 +23,11 @@ const JobCard = ({ id, company, location, title, isPaid, jobDetails, isInternshi
     return (
         <div className="job-card" onClick={handleCardClick}>
             <div className="job-header">
-                <div className="company-logo">
+                <div className="company-logo_cards">
                     <div className="logo-placeholder"></div>
                 </div>
                 <div className="company-info">
-                    <h3 className="company-name">{company}</h3>
+                    <h3 className="company-name_card">{company}</h3>
                     <p className="company-location">{location}</p>
                 </div>
                 <div className="job-type-badges">
@@ -73,7 +73,7 @@ const JobCard = ({ id, company, location, title, isPaid, jobDetails, isInternshi
                     status,
                     postedAgo,
                     deadline,
-                    requirements: "Requisito 1\nRequisito 2" // ⚡️ si tu API trae esto, pasalo aquí
+                   requirements: requirements || "No se especificaron requisitos"// ⚡️ si tu API trae esto, pasalo aquí
                 }}
                 isOpen={showModal}
                 onClose={handleCloseModal}

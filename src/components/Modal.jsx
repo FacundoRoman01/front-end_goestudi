@@ -49,12 +49,12 @@ export default function Modal({ job, isOpen, onClose, onApply, onSave }) {
               </div>
             )}
           </div>
-          {job.salary && (
+          {/* {job.salary && (
             <div className="job-modal-salary">
               <strong>Salario: </strong>
               {job.salary}
             </div>
-          )}
+          )} */}
         </div>
 
         {/* Main Content */}

@@ -100,7 +100,7 @@
 }
 
 .search-input:focus {
-  border-color: #3b82f6;
+  border-color: #00a8ff;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
@@ -109,7 +109,7 @@
   padding: 0 2rem;
   font-size: 1rem;
   font-weight: 500;
-  background-color: #2563eb;
+  background-color: #00a8ff;
   color: white;
   border: none;
   border-radius: 0.5rem;
@@ -118,7 +118,7 @@
 }
 
 .search-button:hover {
-  background-color: #1d4ed8;
+  background-color: rgb(35, 79, 199);
 }
 
 @media (max-width: 768px) {

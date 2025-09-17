@@ -12,6 +12,7 @@ export default function UserProfile() {
     profilePictureUrl: "",
     cvUrl: "",
   });
+
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
@@ -21,12 +22,15 @@ export default function UserProfile() {
       return;
     }
 
-    // Obtener perfil existente
-    fetch("http://localhost:8080/api/v1/profiles/user", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((res) => res.json())
-      .then((data) => {
+    const fetchProfile = async () => {
+      try {
+        const res = await fetch("http://localhost:8080/api/v1/profiles/user", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (!res.ok) throw new Error("No se pudo cargar el perfil");
+
+        const data = await res.json();
         setProfile({
           fullName: data.fullName || "",
           description: data.description || "",
@@ -36,8 +40,13 @@ export default function UserProfile() {
           profilePictureUrl: data.profilePictureUrl || "",
           cvUrl: data.cvUrl || "",
         });
-      })
-      .catch((err) => console.error(err));
+      } catch (err) {
+        console.error(err);
+        // Si no hay perfil, dejamos el formulario vacío
+      }
+    };
+
+    fetchProfile();
   }, [token, navigate]);
 
   const handleChange = (e) => {
@@ -46,9 +55,10 @@ export default function UserProfile() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       const res = await fetch("http://localhost:8080/api/v1/profiles/user", {
-        method: "POST", // o PUT si tu backend soporta actualizar
+        method: "POST", // PUT si tu backend soporta actualizar
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -59,10 +69,9 @@ export default function UserProfile() {
       if (!res.ok) throw new Error("Error al guardar el perfil");
 
       alert("Perfil guardado correctamente");
-      navigate("/user/profile"); // ← redirigir después de guardar
-    } catch (error) {
-      console.error(error);
-      alert(error.message);
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
     }
   };
 
