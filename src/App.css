@@ -28,3 +28,23 @@
     grid-template-columns: 1fr; /* 1 columna en pantallas pequeñas */
   }
 }
+
+
+/* JobCard.css o App.css */
+.toast-success {
+    background-color: #4caf50; /* verde */
+    color: white;
+    font-weight: bold;
+}
+
+.toast-error {
+    background-color: #f44336; /* rojo */
+    color: white;
+    font-weight: bold;
+}
+
+.toast-loading {
+    background-color: #2196f3; /* azul */
+    color: white;
+    font-weight: bold;
+}

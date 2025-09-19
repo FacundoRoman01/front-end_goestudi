@@ -1,8 +1,49 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import { X, MapPin, Clock, DollarSign, Briefcase } from "lucide-react";
 import "../css/Modal.css";
 
-export default function Modal({ job, isOpen, onClose, onApply, onSave }) {
+export default function Modal({ 
+  job, 
+  isOpen, 
+  onClose, 
+  onApply, 
+  onSave, 
+  isApplicationView = false, 
+  appliedCoverLetter = "" 
+}) {
+  // 🔹 Guardamos la cover letter en localStorage usando el ID del trabajo
+  const [coverLetter, setCoverLetter] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      if (isApplicationView && appliedCoverLetter) {
+        // Si estamos viendo una postulación, mostramos la cover letter enviada
+        setCoverLetter(appliedCoverLetter);
+      } else {
+        // Comportamiento normal: cargar desde localStorage
+        const savedLetter = localStorage.getItem(`coverLetter_${job.id}`) || "";
+        setCoverLetter(savedLetter);
+      }
+    }
+  }, [isOpen, job.id, isApplicationView, appliedCoverLetter]);
+
+  const handleCoverLetterChange = (e) => {
+    if (isApplicationView) return; // No permitir edición en vista de postulación
+    
+    const value = e.target.value;
+    setCoverLetter(value);
+    localStorage.setItem(`coverLetter_${job.id}`, value); // 🔹 Guardamos en localStorage mientras se escribe
+  };
+
+  const handleApplyClick = async () => {
+    if (!onApply || isApplicationView) return;
+    setLoading(true);
+    await onApply(coverLetter);
+    setLoading(false);
+    localStorage.removeItem(`coverLetter_${job.id}`); // 🔹 Limpiamos localStorage después de aplicar
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -18,16 +59,12 @@ export default function Modal({ job, isOpen, onClose, onApply, onSave }) {
               <span>{job.location}</span>
             </div>
           </div>
-          <button
-            onClick={onClose}
-            className="job-modal-close-button"
-            aria-label="Cerrar modal"
-          >
+          <button onClick={onClose} className="job-modal-close-button" aria-label="Cerrar modal">
             <X size={24} />
           </button>
         </div>
 
-        {/* Key Details Section */}
+        {/* Key Details */}
         <div className="job-modal-details">
           <div className="job-modal-badges">
             {job.isPaid && (
@@ -49,12 +86,6 @@ export default function Modal({ job, isOpen, onClose, onApply, onSave }) {
               </div>
             )}
           </div>
-          {/* {job.salary && (
-            <div className="job-modal-salary">
-              <strong>Salario: </strong>
-              {job.salary}
-            </div>
-          )} */}
         </div>
 
         {/* Main Content */}
@@ -72,12 +103,32 @@ export default function Modal({ job, isOpen, onClose, onApply, onSave }) {
           <div className="job-modal-section">
             <h4 className="job-modal-section-title">Requisitos</h4>
             <div className="job-modal-requirements">
-              {job.requirements.split("\n").map((req, index) => (
+              {job.requirements && job.requirements.split("\n").map((req, index) => (
                 <p key={index} className="job-modal-requirement-item">
                   {req}
                 </p>
               ))}
             </div>
+          </div>
+
+          {/* Cover Letter */}
+          <div className="job-modal-section">
+            <h4 className="job-modal-section-title">
+              {isApplicationView ? "Carta de presentación enviada" : "Carta de presentación"}
+            </h4>
+            <textarea
+              className={`job-modal-cover-letter ${isApplicationView ? 'read-only' : ''}`}
+              value={coverLetter}
+              onChange={handleCoverLetterChange}
+              placeholder={isApplicationView ? "" : "Escribe tu carta de presentación..."}
+              rows={5}
+              readOnly={isApplicationView}
+            />
+            {isApplicationView && (
+              <p className="cover-letter-note">
+                Esta es la carta de presentación que enviaste con tu postulación.
+              </p>
+            )}
           </div>
         </div>
 
@@ -94,18 +145,28 @@ export default function Modal({ job, isOpen, onClose, onApply, onSave }) {
           </div>
 
           <div className="job-modal-actions">
-            <button
-              onClick={onSave}
-              className="job-modal-button job-modal-button-secondary"
-            >
-              Guardar
-            </button>
-            <button
-              onClick={onApply}
-              className="job-modal-button job-modal-button-primary"
-            >
-              Aplicar
-            </button>
+            {!isApplicationView && (
+              <>
+                <button onClick={onSave} className="job-modal-button job-modal-button-secondary">
+                  Guardar
+                </button>
+                <button
+                  onClick={handleApplyClick}
+                  className="job-modal-button job-modal-button-primary"
+                  disabled={loading}
+                >
+                  {loading ? "Enviando..." : "Aplicar"}
+                </button>
+              </>
+            )}
+            {isApplicationView && (
+              <button 
+                onClick={onClose} 
+                className="job-modal-button job-modal-button-primary"
+              >
+                Cerrar
+              </button>
+            )}
           </div>
         </div>
       </div>

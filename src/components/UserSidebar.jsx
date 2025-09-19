@@ -29,10 +29,10 @@ export default function UserSidebar({ isOpen, onClose, userName, userEmail, user
           <Link to="/company/jobs" className="sidebar-link" onClick={onClose}>
             <Briefcase size={20} /> Mis Ofertas de Trabajo
           </Link>
-          <Link to="/company/job/new" className="sidebar-link" onClick={onClose}>
+          <Link to="/company/profile/new" className="sidebar-link" onClick={onClose}>
             <PlusCircle size={20} /> Publicar Trabajo
           </Link>
-          <Link to="/company/applications" className="sidebar-link" onClick={onClose}>
+          <Link to="/company/candidates" className="sidebar-link" onClick={onClose}>
             <Users size={20} /> Candidatos
           </Link>
           <Link to={getProfileRoute()} className="sidebar-link" onClick={onClose}>
@@ -50,9 +50,9 @@ export default function UserSidebar({ isOpen, onClose, userName, userEmail, user
           <Link to="/cv" className="sidebar-link" onClick={onClose}>
             <FileText size={20} /> Mi CV
           </Link>
-          <Link to="/applications" className="sidebar-link" onClick={onClose}>
-            <CheckCircle size={20} /> Mis Postulaciones
-          </Link>
+    <Link to="/user/applications" className="sidebar-link" onClick={onClose}>
+  <CheckCircle size={20} /> Mis Postulaciones
+</Link>
           <Link to="/favorites" className="sidebar-link" onClick={onClose}>
             <Heart size={20} /> Mis Favoritos
           </Link>
